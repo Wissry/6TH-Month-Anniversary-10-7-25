@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 6th Month Anniversary</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ff66b2;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container {
+    background: #ff99cc;
+    padding: 30px;
+    border-radius: 25px;
+    max-width: 520px;
+    width: 90%;
+    margin: 120px auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.video-btn {
+    display: inline-block;
+    padding: 16px 28px;
+    border-radius: 35px;
+    border: none;
+    background: white;
+    color: #ff2f92;
+    font-size: 1.1em;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.ask3ad {
+    font-size: 3em;
+    font-weight: bold;
+    margin-top: 40vh;
+}
+
+.reload-btn {
+    margin-top: 20px;
+    padding: 14px 26px;
+    border-radius: 30px;
+    border: none;
+    background: white;
+    color: #ff2f92;
+}
+
+/* Mixed floating emojis */
+.float {
+    position: absolute;
+    bottom: -30px;
+    font-size: 24px;
+    animation: floatUp linear infinite;
+    opacity: 0.9;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(-110vh) scale(1.15); opacity: 0; }
+}
+
+.message {
+    margin-top: 22px;
+    line-height: 1.6;
+}
+
+.date {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.signature {
+    margin-top: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+const correctPassword = "10/7/2025";
+
+/* Floating animation */
+const emojis = ["💕","💗","🌸","✨","🥹","💖"];
+
+function createFloat() {
+    const el = document.createElement("div");
+    el.className = "float";
+    el.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+    el.style.left = Math.random()*100 + "vw";
+    el.style.animationDuration = (6 + Math.random()*4) + "s";
+    document.body.appendChild(el);
+
+    setTimeout(()=> el.remove(), 9000);
+}
+
+setInterval(createFloat, 450);
+
+/* -------- PASSWORD FLOW -------- */
+
+var input = prompt("Enter the anniversary password 💖");
+
+if (input === correctPassword) {
+    renderContent();
+} else {
+    renderAsk3AD();
+}
+
+function renderAsk3AD() {
+    document.body.innerHTML = `
+        <div class='ask3ad'>ASK 3AD</div>
+
+        <button class='reload-btn' onclick='tryAgain()'>
+            Reload to Try Again 💗
+        </button>
+    `;
+}
+
+function tryAgain() {
+    location.reload();
+}
+
+/* ANNIVERSARY CONTENT WITH VIDEO LINK */
+function renderContent() {
+    document.body.innerHTML = `
+        <div class='container'>
+            <h1>HI KENO 💖</h1>
+
+            <div class='subtitle'>
+                An anniversary video from me to you
+            </div>
+
+            <a class="video-btn" href="https://share.icloud.com/photos/09cj19Im_PawBj6De3xXPBk6g" target="_blank">
+                ▶ Watch Our Anniversary Video 💗
+            </a>
+
+            <div class='message'>
+                Six months with you has been real, human, and beautiful.  
+                We’ve grown better, loved deeper, and learned patience together.  
+                Even when I annoyed you or we argued, it only showed me how much you matter to me.  
+                Thank you for being the girl of my dreams and my safe home 💕.
+            </div>
+
+            <div class='date'>
+                💞 6 Months Together – July 10 Anniversary 💞
+            </div>
+
+            <div class='signature'>
+                From Presley to Keno 💗
+            </div>
+        </div>
+    `;
+}
+
+function renderContent() {
+    renderContent();
+}
+</script>
+
+</body>
+</html>
