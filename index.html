@@ -25,81 +25,95 @@ body {
     margin: 80px auto;
 }
 
-.blocked {
-    font-size: 3em;
-    font-weight: bold;
-    margin-top: 38vh;
-}
-
-.reload-btn {
-    margin-top: 20px;
-    padding: 12px 28px;
-    border-radius: 30px;
+.music-btn {
+    margin-top: 15px;
+    padding: 10px 22px;
+    border-radius: 25px;
     border: none;
     background: white;
     color: #ff2f92;
-    font-size: 1em;
+    font-size: 0.95em;
 }
 
-/* Mixed floating emojis */
-.float {
+/* Floating hearts */
+.heart {
     position: absolute;
-    bottom: -30px;
-    font-size: 22px;
-    animation: floatUp linear infinite;
-    opacity: 0.85;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.8;
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    0% { transform: translateY(0); opacity: 0; }
     10% { opacity: 1; }
-    100% { transform: translateY(-110vh) scale(1.1); opacity: 0; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+.stage2 {
+    margin-top: 35vh;
+}
+
+.blocked {
+    font-size: 3em;
+    font-weight: bold;
+    margin-top: 40vh;
 }
 </style>
 </head>
 
 <body>
 
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" autoplay loop>
+    <!-- REPLACE THIS WITH YOUR OWN MUSIC LINK -->
+    <source src="https://your-music-host.com/romantic.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const correctPassword = "10/7/2025";
 
-/* Floating animation */
-const emojis = ["💕","💗","🌸","✨","🥹","💖"];
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(heart);
 
-function createFloat() {
-    const el = document.createElement("div");
-    el.className = "float";
-    el.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
-
-    el.style.left = Math.random()*100 + "vw";
-    el.style.animationDuration = (6 + Math.random()*5) + "s";
-
-    document.body.appendChild(el);
-    setTimeout(()=> el.remove(), 9000);
+    setTimeout(() => heart.remove(), 8000);
 }
-setInterval(createFloat, 400);
+setInterval(createHeart, 500);
 
-/* -------- PASSWORD FLOW -------- */
-
+/* PASSWORD FLOW */
 var input = prompt("Enter the anniversary password 💖");
 
 if (input !== correctPassword) {
-    showAsk3AD();
+    showStage2();
 }
 
-function showAsk3AD() {
-    // Only ASK 3AD + reload button
+function showStage2() {
     document.body.innerHTML = `
         <div class='blocked'>ASK 3AD</div>
 
-        <button class='reload-btn' onclick='reloadPage()'>
-            Tap to Try Again 💗
-        </button>
+        <div class='stage2'>
+            <h3>3AD told you</h3>
+            <input id='pass2' type='password' placeholder='Enter password again'>
+            <br>
+            <button onclick='secondCheck()'>Open 💗</button>
+        </div>
     `;
 }
 
-function reloadPage() {
-    location.reload();
+function secondCheck() {
+    const p2 = document.getElementById("pass2").value;
+
+    if (p2 === correctPassword) {
+        showContent();
+    } else {
+        showStage2();
+    }
 }
 
 /* ANNIVERSARY CONTENT */
@@ -108,6 +122,8 @@ function showContent() {
         <div class='container'>
             <h1>HI KENO 💖</h1>
             <p>An anniversary video from me to you</p>
+
+            <button class="music-btn" onclick="toggleMusic()">🎶 Music On/Off</button>
 
             <a href="https://share.icloud.com/photos/09cj19Im_PawBj6De3xXPBk6g" target="_blank">
                 ▶ Watch Our Anniversary Video
@@ -130,8 +146,15 @@ function showContent() {
     `;
 }
 
-// expose for later stage
-window.reloadPage = reloadPage;
+/* MUSIC TOGGLE FUNCTION */
+function toggleMusic() {
+    const music = document.getElementById("bgMusic");
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
 </script>
 
 </body>
